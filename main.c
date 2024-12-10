@@ -16,7 +16,7 @@ typedef struct{
     float preco;
     char descricao[100];
     char tipo[20];   
-} Produto; 
+} 
 
 int main() {
  
