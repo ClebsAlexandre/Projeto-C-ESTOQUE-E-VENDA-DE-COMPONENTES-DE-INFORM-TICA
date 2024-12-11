@@ -42,7 +42,7 @@ int main(int argc, char **argv){
             listar_prod(p);
             break;
         case 3:
-            estoque(p);
+            att_estoque(p);
             break;
         case 4:
             vender(p);
@@ -67,8 +67,8 @@ int menu(){
     printf("--------------- MENU ---------------\n");
     printf("1 - Cadastrar produto\n");
     printf("2 - Listar Produtos\n");
-    printf("3 - Atualizar Estoque\n");
-    printf("4 - Ir para venda\n");
+    printf("3 - Atualizar Estoque (INDISPONÍVEL)\n");
+    printf("4 - Ir para venda (INDISPONÍVEL)\n");
     printf("5 - SAIR\n");
     printf("Escolha uma opcao: ");
     scanf("%d", &opc);
@@ -90,42 +90,42 @@ void cad_prod(prod *p) {
     printf("\nNome do produto: ");
     fgets(p[cont_prod].nome, strlen(p[cont_prod].nome), stdin);
     lb();
-    printf("\ncad_prod Nome: %s", p[cont_prod].nome);
 
     printf("\nDescricao: ");
     fgets(p[cont_prod].descr, strlen(p[cont_prod].descr), stdin);
     lb();
-    printf("\ncad_prod Descr: %s", p[cont_prod].descr);
-    
+
     printf("\nUnidade: ");
     fgets(p[cont_prod].unidade, strlen(p[cont_prod].unidade), stdin);
     lb();
+
     printf("\nValidade: ");
     fgets(p[cont_prod].validade, strlen(p[cont_prod].validade), stdin);
     lb();
+
     printf("\nPreco de venda: ");
     scanf(p[cont_prod].preco_venda, strlen(p[cont_prod].preco_venda), stdin);
+    lb();
 }
 
 void lb(){
     char p;
     while((p = getchar()) != '\n' && p != EOF)
-    printf("\n Pressione ENTER\n");
+    printf("\n");
     
 }
 
 void listar_prod(prod *p) {
     int i;
-    printf("\ncont_prod: %d\n", cont_prod);
     printf("\n");
     for(i=0; i<=cont_prod; i++)
     //interface da lista//
-    printf("Codigo: %d", p[i].cod);
-    printf("Nome: %d", p[i].nome);
-    printf("Descricao: %d", p[i].descr);
-    printf("Unidades: %d", p[i].unidade);
-    printf("Validade: %d", p[i].validade);
-    printf("Preco: %d", p[i].preco_venda);
+    printf("Codigo: %d\n", p[i].cod);
+    printf("Nome: %d\n", p[i].nome);
+    printf("Descricao: %d\n", p[i].descr);
+    printf("Unidades: %d\n", p[i].unidade);
+    printf("Validade: %d\n", p[i].validade);
+    printf("Preco: %d\n", p[i].preco_venda);
     
 }
 
