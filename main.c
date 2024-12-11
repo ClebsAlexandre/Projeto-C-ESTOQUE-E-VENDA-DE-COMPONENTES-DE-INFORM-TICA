@@ -11,20 +11,13 @@ typedef struct produto{
     int cod;
     char nome[20];
     char descr[100];
-    char unidade[5];
-    char validade;
-    char preco_venda;   
+    char unidade[3];
+    char validade[2];
+    char preco_venda[4];   
 } prod;
 
-int cont_prod = -1;
 
 int menu();
-void cad_prod(prod *);
-void att_estoque(prod *);
-void listar_prod(prod *);
-void vender(prod *);
-//limpeza de buffer//
-void lb();
 
 int main(int argc, char **argv){
     int opc;
@@ -79,53 +72,11 @@ int menu(){
 }
 
 void cad_prod(prod *p) {
-    int i;
-
-    cont_prod++;
-
-    for(i-0; i<=cont_prod; i++);
-
-    p[cont_prod].cod = p[i-1].cod + 1;
-
-    printf("\nNome do produto: ");
-    fgets(p[cont_prod].nome, strlen(p[cont_prod].nome), stdin);
-    lb();
-
-    printf("\nDescricao: ");
-    fgets(p[cont_prod].descr, strlen(p[cont_prod].descr), stdin);
-    lb();
-
-    printf("\nUnidade: ");
-    fgets(p[cont_prod].unidade, strlen(p[cont_prod].unidade), stdin);
-    lb();
-
-    printf("\nValidade: ");
-    fgets(p[cont_prod].validade, strlen(p[cont_prod].validade), stdin);
-    lb();
-
-    printf("\nPreco de venda: ");
-    scanf(p[cont_prod].preco_venda, strlen(p[cont_prod].preco_venda), stdin);
-    lb();
-}
-
-void lb(){
-    char p;
-    while((p = getchar()) != '\n' && p != EOF)
-    printf("\n");
-    
+//refazer cadastro//
 }
 
 void listar_prod(prod *p) {
-    int i;
-    printf("\n");
-    for(i=0; i<=cont_prod; i++)
-    //interface da lista//
-    printf("Codigo: %d\n", p[i].cod);
-    printf("Nome: %d\n", p[i].nome);
-    printf("Descricao: %d\n", p[i].descr);
-    printf("Unidades: %d\n", p[i].unidade);
-    printf("Validade: %d\n", p[i].validade);
-    printf("Preco: %d\n", p[i].preco_venda);
+//refazer lista de produtos//
     
 }
 
