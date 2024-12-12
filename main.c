@@ -3,8 +3,8 @@
 // Grupo: Clebson  Alexandre, Sergio Roberto
 // Tema: Sistema de Estoque e Venda para Componentes de Informática
 
-#include <stdio.h> 
-#include <string.h> 
+#include <stdio.h>
+#include <string.h>
 
 // Define uma estrutura para armazenar as informações de cada componente
 struct Comp {
@@ -49,21 +49,29 @@ int main() {
         switch (opc) {
             case 1:
                 cad_comp(&comp[cont_comp + 1]); // Cadastra um novo componente
+                break;
             case 2:
                 listar_comp(comp);            // Lista os componentes cadastrados
+                break;
             case 3:
                 att_estoque(comp);           // Atualiza a quantidade em estoque de um componente
+                break;
             case 4:
                 remover_comp(comp);          // Remove um componente
+                break; 
             case 5:
                 buscar_comp(comp);           // Busca um componente pelo código
+                break; 
             case 6:
                 vender(comp);                // Vende um componente
+                break; 
             case 7: 
                 gerar_relatorio_vendas(comp); // Gera um relatório de vendas
+                break; 
             case 8:
                 salvar_dados(comp);           // Salva os dados dos componentes em um arquivo
                 printf("Saindo...\n");          // Exibe a mensagem "Saindo..."
+                break; 
             default:
                 printf("Escolha uma Opcao valida!\n"); // Exibe uma mensagem de erro caso a opção seja inválida
         }
@@ -103,6 +111,10 @@ void cad_comp(struct Comp *comp) {
     // Lê o código do componente
     printf("Codigo do Componente: ");
     scanf("%d", &comp->codigo);
+
+    // Limpa o buffer do teclado (remove o "enter" que ficou pendente)
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { } 
 
     comp->qtdVendida = 0; // Inicializa a quantidade vendida do componente como 0
 
@@ -166,7 +178,7 @@ void att_estoque(struct Comp *comp) {
     // Verifica se há componentes cadastrados
     if (cont_comp < 0) {
         printf("Nenhum componente cadastrado.\n");
-        return; 
+        return; // Se não houver, sai da função
     }
 
     int codigo, qtd; // Variáveis para armazenar o código do componente e a quantidade a ser adicionada
@@ -317,7 +329,7 @@ void gerar_relatorio_vendas(struct Comp *comp) {
         struct Comp componente_atual = comp[i]; 
 
         if (componente_atual.qtdVendida > 0) { 
-            printf("Componente: %s\n", componente_atual.nome);         
+            printf("Componente: %s\n", componente_atual.nome);          
             printf("Marca: %s\n", componente_atual.marca);            
             printf("Quantidade Vendida: %d\n", componente_atual.qtdVendida); 
             printf("Valor Total: R$ %.2f\n", componente_atual.qtdVendida * componente_atual.preco); 
@@ -330,7 +342,7 @@ void gerar_relatorio_vendas(struct Comp *comp) {
 void salvar_dados(struct Comp *comp) {
     FILE *arquivo = fopen("componentes.txt", "w"); // Abre o arquivo "componentes.txt" em modo de escrita ("w")
     if (arquivo == NULL) {                         // Verifica se o arquivo foi aberto corretamente
-        printf("Erro ao abrir o arquivo.\n");      // Se não foi, exibe uma mensagem de erro
+        printf("Erro ao abrir o arquivo.\n");      
         return; 
     }
 
@@ -342,7 +354,7 @@ void salvar_dados(struct Comp *comp) {
                 comp[i].qtdVendida);
     }
 
-    fclose(arquivo);      
+    fclose(arquivo);          
     printf("Dados salvos com sucesso!\n"); // Exibe uma mensagem de sucesso
 }
 
@@ -350,26 +362,24 @@ void salvar_dados(struct Comp *comp) {
 void carregar_dados(struct Comp *comp) {
     FILE *arquivo = fopen("componentes.txt", "r"); // Abre o arquivo "componentes.txt" em modo de leitura ("r")
     if (arquivo == NULL) {                         // Verifica se o arquivo foi aberto corretamente
-        printf("Erro ao abrir o arquivo ou arquivo nao existe.\n"); // Se não foi, exibe uma mensagem de erro
-        return; // Sai da função
+        printf("Erro ao abrir o arquivo ou arquivo nao existe.\n"); 
+        return; 
     }
 
     // Loop para ler os dados do arquivo e armazená-los no vetor de componentes
     for (cont_comp = -1; 
-         fscanf(arquivo, "%d,%[^,],%[^,],%d,%f,%[^,],%[^,],%d,%d\n", // Lê os dados do arquivo, separados por vírgula
-                &comp[cont_comp + 1].codigo, // Lê o código do componente e armazena na próxima posição do vetor
-                comp[cont_comp + 1].nome,   // Lê o nome do componente
-                comp[cont_comp + 1].marca,  // Lê a marca do componente
-                &comp[cont_comp + 1].garantia, // Lê a garantia do componente
-                &comp[cont_comp + 1].preco,   // Lê o preço do componente
-                comp[cont_comp + 1].descricao, // Lê a descrição do componente
-                comp[cont_comp + 1].tipo,     // Lê o tipo do componente
-                &comp[cont_comp + 1].quantidade, // Lê a quantidade em estoque do componente
-                &comp[cont_comp + 1].qtdVendida) == 9 // Lê a quantidade vendida do componente. O fscanf retorna 9 se leu todos os valores com sucesso
-         && cont_comp < 5; // Verifica se ainda há espaço no vetor para mais componentes
-         cont_comp++) {
-        
-    }
+         fscanf(arquivo, "%d,%[^,],%[^,],%d,%f,%[^,],%[^,],%d,%d\n", 
+                &comp[cont_comp + 1].codigo, 
+                comp[cont_comp + 1].nome, 
+                comp[cont_comp + 1].marca, 
+                &comp[cont_comp + 1].garantia,
+                &comp[cont_comp + 1].preco, 
+                comp[cont_comp + 1].descricao, 
+                comp[cont_comp + 1].tipo, 
+                &comp[cont_comp + 1].quantidade,
+                &comp[cont_comp + 1].qtdVendida) == 9 
+         && cont_comp < 4; 
+         cont_comp++); 
 
     fclose(arquivo); 
     printf("Dados carregados com sucesso!\n"); // Exibe uma mensagem de sucesso
