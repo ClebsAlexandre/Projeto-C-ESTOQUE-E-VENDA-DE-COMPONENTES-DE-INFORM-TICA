@@ -6,16 +6,16 @@
 #include <stdio.h> 
 #include <string.h> 
 
-// Define uma estrutura chamada para armazenar as informações de cada componente
+// Define uma estrutura para armazenar as informações de cada componente
 struct Comp {
-    char nome[50];      // Nome do componente (até 50 caracteres)
-    char marca[30];     // Marca do componente (até 30 caracteres)
+    char nome[50];      // Nome do componente
+    char marca[30];     // Marca do componente 
     int codigo;         // Código do componente
     int garantia;        // Garantia do componente em meses
     float preco;        // Preço do componente
-    char descricao[100]; // Descrição do componente (até 100 caracteres)
-    char tipo[20];      // Tipo do componente (até 20 caracteres)
-    char notaFiscal[20]; // Número da nota fiscal (até 20 caracteres)
+    char descricao[100]; // Descrição do componente
+    char tipo[20];      // Tipo do componente
+    char notaFiscal[20]; // Número da nota fiscal
     int quantidade;     // Quantidade em estoque do componente
     int qtdVendida;    // Quantidade do componente já vendida
 };
@@ -41,7 +41,7 @@ int main() {
 
     carregar_dados(comp); // Carrega os dados dos componentes do arquivo (se existir)
 
-    // Loop principal do programa. Repete até que o usuário escolha a opção "SAIR" (8)
+    // Loop principal do programa, repete até que o usuário escolha a opção "SAIR" (8)
     do {
         opc = menu(); // Chama a função "menu" para exibir as opções e ler a escolha do usuário
 
