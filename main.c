@@ -112,12 +112,6 @@ void cad_comp(struct Comp *comp) {
     printf("Codigo do Componente: ");
     scanf("%d", &comp->codigo);
 
-    // Limpa o buffer do teclado (remove o "enter" que ficou pendente)
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) { } 
-
-    comp->qtdVendida = 0; // Inicializa a quantidade vendida do componente como 0
-
     // Lê o nome do componente
     printf("Nome do Componente: ");
     scanf(" %[^\n]", comp->nome); 
@@ -145,6 +139,8 @@ void cad_comp(struct Comp *comp) {
     // Lê a quantidade em estoque do componente
     printf("Quantidade em estoque: ");
     scanf("%d", &comp->quantidade);
+
+     comp->qtdVendida = 0; // Inicializa a quantidade vendida do componente como 0
 }
 
 // Função para listar os componentes cadastrados
