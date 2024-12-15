@@ -94,7 +94,7 @@ int menu() {
            "8 - SAIR\n\n"
            "Escolha uma Opcao: ");
     scanf("%d", &opc); // Lê a opção digitada pelo usuário
-    return opc;        // Retorna a opção escolhida
+    return opc; // Retorna a opção escolhida
 }
 
 
@@ -174,7 +174,7 @@ void att_estoque(struct Comp *comp) {
     // Verifica se há componentes cadastrados
     if (cont_comp < 0) {
         printf("Nenhum componente cadastrado.\n");
-        return; // Se não houver, sai da função
+        return;
     }
 
     int codigo, qtd; // Variáveis para armazenar o código do componente e a quantidade a ser adicionada
@@ -222,7 +222,7 @@ void remover_comp(struct Comp *comp) {
                 comp[j] = comp[j + 1]; 
             }
             cont_comp--; // atualiza o contador de componentes
-            return; // Sai da função
+            return;
         }
     }
     printf("Componente nao encontrado.\n"); // Se o componente não for encontrado, exibe uma mensagem
@@ -336,27 +336,33 @@ void gerar_relatorio_vendas(struct Comp *comp) {
 
 // Função para salvar os dados dos componentes em um arquivo
 void salvar_dados(struct Comp *comp) {
-    FILE *arquivo = fopen("componentes.txt", "w"); // Abre o arquivo "componentes.txt" em modo de escrita ("w")
+    FILE *arquivo = fopen("componentes.txt", "w"); // Abre o arquivo "componentes.txt" em modo de escrita
     if (arquivo == NULL) {                         // Verifica se o arquivo foi aberto corretamente
         printf("Erro ao abrir o arquivo.\n");      
         return; 
     }
 
     // Loop para percorrer o vetor de componentes e salvar os dados de cada um no arquivo
-    for (int i = 0; i <= cont_comp; i++) {
+   for (int i = 0; i <= cont_comp; i++) {
         fprintf(arquivo, "%d,%s,%s,%d,%.2f,%s,%s,%d,%d\n", // Escreve os dados no arquivo, separados por vírgula
-                comp[i].codigo, comp[i].nome, comp[i].marca, comp[i].garantia,
-                comp[i].preco, comp[i].descricao, comp[i].tipo, comp[i].quantidade,
+                comp[i].codigo, 
+                comp[i].nome, 
+                comp[i].marca, 
+                comp[i].garantia,
+                comp[i].preco, 
+                comp[i].descricao, 
+                comp[i].tipo, 
+                comp[i].quantidade,
                 comp[i].qtdVendida);
     }
 
-    fclose(arquivo);          
+    fclose(arquivo); // Fecha o arquivo          
     printf("Dados salvos com sucesso!\n"); // Exibe uma mensagem de sucesso
 }
 
 // Função para carregar os dados dos componentes de um arquivo
 void carregar_dados(struct Comp *comp) {
-    FILE *arquivo = fopen("componentes.txt", "r"); // Abre o arquivo "componentes.txt" em modo de leitura ("r")
+    FILE *arquivo = fopen("componentes.txt", "r"); // Abre o arquivo "componentes.txt" em modo de leitura 
     if (arquivo == NULL) {                         // Verifica se o arquivo foi aberto corretamente
         printf("Erro ao abrir o arquivo ou arquivo nao existe.\n"); 
         return; 
@@ -377,6 +383,6 @@ void carregar_dados(struct Comp *comp) {
          && cont_comp < 4; 
          cont_comp++); 
 
-    fclose(arquivo); 
+    fclose(arquivo); // Fecha o arquivo
     printf("Dados carregados com sucesso!\n"); // Exibe uma mensagem de sucesso
 }
